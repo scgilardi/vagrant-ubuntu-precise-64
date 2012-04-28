@@ -8,6 +8,7 @@ BOX="ubuntu-12.04-64"
 
 # location, location, location
 FOLDER_BASE=`pwd`
+FOLDER_ISO_CACHE="${FOLDER_BASE}/iso-cache"
 FOLDER_BUILD="${FOLDER_BASE}/build"
 FOLDER_VBOX="${FOLDER_BUILD}/vbox"
 FOLDER_ISO="${FOLDER_BUILD}/iso"
@@ -29,6 +30,7 @@ rm -rf "${FOLDER_ISO_INITRD}"
 mkdir -p "${FOLDER_ISO_INITRD}"
 
 ISO_URL="http://mirror.ox.ac.uk/sites/releases.ubuntu.com/releases/precise/ubuntu-12.04-alternate-amd64.iso"
+ISO_CACHE_FILENAME="${FOLDER_ISO_CACHE}/`basename ${ISO_URL}`"
 ISO_FILENAME="${FOLDER_ISO}/`basename ${ISO_URL}`"
 
 INITRD_FILENAME="${FOLDER_ISO}/initrd.gz"
@@ -37,7 +39,11 @@ ISO_GUESTADDITIONS="/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditio
 
 # download the installation disk if you haven't already
 if [ ! -e "${ISO_FILENAME}" ]; then
-  wget -O "${ISO_FILENAME}" "${ISO_URL}"
+    if [ -e "${ISO_CACHE_FILENAME}" ]; then
+        cp "${ISO_CACHE_FILENAME}" "${ISO_FILENAME}"
+    else
+        wget -O "${ISO_FILENAME}" "${ISO_URL}"
+    fi
 fi
 
 # customize it
