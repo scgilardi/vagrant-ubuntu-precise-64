@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BOX="ubuntu-precise-64"
+BOX="ubuntu-12.04-64"
 
 # location, location, location
 FOLDER_BASE=`pwd`
@@ -23,7 +23,7 @@ chmod -R u+w "${FOLDER_ISO_INITRD}"
 rm -rf "${FOLDER_ISO_INITRD}"
 mkdir -p "${FOLDER_ISO_INITRD}"
 
-ISO_URL="http://cdimage.ubuntu.com/daily/current/precise-alternate-amd64.iso"
+ISO_URL="http://mirror.ox.ac.uk/sites/releases.ubuntu.com/releases/precise/ubuntu-12.04-alternate-amd64.iso"
 ISO_FILENAME="${FOLDER_ISO}/`basename ${ISO_URL}`"
 
 INITRD_FILENAME="${FOLDER_ISO}/initrd.gz"
